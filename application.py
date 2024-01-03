@@ -21,11 +21,11 @@ Type  = {
 
 @application.route('/')
 def index():
-    return "Hello Kits!"
+    return ("Hello Kits!")
 
 @application.route('/home')
-def home():x
-    return "Hello Codegnan!"
+def home():
+    return ("Hello Codegnan!")
 
 if __name__=="__main__":
     application.run()
