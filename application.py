@@ -25,7 +25,7 @@ def index():
 
 @application.route('/home')
 def home():
-    return ("Hello Codegnan!")
+    return render_template('index.html',prediction='hello world')
 
 if __name__=="__main__":
     application.run()
