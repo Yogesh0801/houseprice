@@ -21,11 +21,29 @@ Type  = {
 
 @application.route('/')
 def index():
-    return ("Hello Kits!")
+    return render_template('index.html',Status=Status,Location=Location,Facing=Facing,Type=Type)
+
+@application.route('/predict',methods=['POST'])
+def result():
+    bedrooms = int(request.form['bedrooms'])
+    bathrooms = int(request.form['bathrooms'])
+    status = int(request.form['status'])
+    size = int(request.form['area'])
+    location = int(request.form['location'])
+    facing = int(request.form['facing'])
+    Types = int(request.form['type'])
+
+    user_input = np.array([[bedrooms,bathrooms,status,size,location,facing,Types]])
+    result = model.predict(user_input)[0].round(2)
+    return render_template('index.html',prediction=result,Status=Status,Location=Location,Facing=Facing,Type=Type)
+
+
+
+
 
 @application.route('/home')
 def home():
-    return render_template('index.html',prediction='hello world')
+    return "Hello Codegnan!"
 
 if __name__=="__main__":
-    application.run()
+    application.run(use_reloader=True,debug=True)
